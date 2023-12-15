@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi-flowable-plus</artifactId>
+    <artifactId>Flowable-Plus</artifactId>
     <version>0.8.3</version>
 
     <name>RuoYi-Flowable-Plus</name>
