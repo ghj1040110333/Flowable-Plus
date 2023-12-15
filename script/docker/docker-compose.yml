@@ -1,5 +1,5 @@
-version: '3'
-
+version: '3.6'
+name: flowable_plus_app
 services:
   mysql:
     image: mysql:8.0.31
@@ -12,7 +12,7 @@ services:
       # 初始化数据库(后续的初始化sql会在这个库执行)
       MYSQL_DATABASE: ry-vue
     ports:
-      - "3306:3306"
+      - "13306:3306"
     volumes:
       # 数据挂载
       - /docker/mysql/data/:/var/lib/mysql/
@@ -110,7 +110,7 @@ services:
       # 配置文件
       - /docker/server1/logs/:/ruoyi/server/logs/
       # skywalking 探针
-#      - /docker/skywalking/agent/:/ruoyi/skywalking/agent
+    #      - /docker/skywalking/agent/:/ruoyi/skywalking/agent
     privileged: true
     network_mode: "host"
 
@@ -125,7 +125,7 @@ services:
       # 配置文件
       - /docker/server2/logs/:/ruoyi/server/logs/
       # skywalking 探针
-#      - /docker/skywalking/agent/:/ruoyi/skywalking/agent
+    #      - /docker/skywalking/agent/:/ruoyi/skywalking/agent
     privileged: true
     network_mode: "host"
 
