@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 流程抄送视图对象 wf_copy
  *
- * @author ruoyi
+ *  @author ghj
  * @date 2022-05-19
  */
 @Data

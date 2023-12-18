@@ -7,7 +7,7 @@ import org.springframework.boot.context.metrics.buffering.BufferingApplicationSt
 /**
  * 启动程序
  *
- * @author ruoyi
+ *  @author ghj
  */
 
 @SpringBootApplication
