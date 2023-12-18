@@ -501,6 +501,7 @@ export default {
         modelName: `业务流程_${dateTime}`
       }
       this.open = true;
+      this.getCategoryList();
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
