@@ -21,3 +21,4 @@ ENTRYPOINT ["java", \
 #            "-Dskywalking.agent.service_name=ruoyi-server", \
 #            "-javaagent:/ruoyi/skywalking/agent/skywalking-agent.jar", \
             "-jar", "app.jar"]
+# docker build -t ruoyi/ruoyi-server:0.8.3 .
