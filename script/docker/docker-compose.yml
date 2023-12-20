@@ -66,39 +66,6 @@ services:
     privileged: true
     #network_mode: "host" #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
 
-  minio:
-    image: minio/minio:RELEASE.2023-03-24T21-41-23Z
-    container_name: minio
-    ports:
-      # api 端口
-      - "9000:9000"
-      # 控制台端口
-      - "9001:9001"
-    environment:
-      # 时区上海
-      TZ: Asia/Shanghai
-      # 管理后台用户名
-      MINIO_ROOT_USER: ruoyi
-      # 管理后台密码，最小8个字符
-      MINIO_ROOT_PASSWORD: ruoyi123
-      # https需要指定域名
-      #MINIO_SERVER_URL: "https://xxx.com:9000"
-      #MINIO_BROWSER_REDIRECT_URL: "https://xxx.com:9001"
-      # 开启压缩 on 开启 off 关闭
-      MINIO_COMPRESS: "off"
-      # 扩展名 .pdf,.doc 为空 所有类型均压缩
-      MINIO_COMPRESS_EXTENSIONS: ""
-      # mime 类型 application/pdf 为空 所有类型均压缩
-      MINIO_COMPRESS_MIME_TYPES: ""
-    volumes:
-      # 映射当前目录下的data目录至容器内/data目录
-      - ./minio/data:/data
-      # 映射配置目录
-      - ./minio/config:/root/.minio/
-    command: server --address ':9000' --console-address ':9001' /data  # 指定容器中的目录 /data
-    privileged: true
-    #network_mode: "host" #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
-
   ruoyi-server1:
     image: ruoyi/ruoyi-server:0.8.3
     container_name: ruoyi-server1
@@ -106,6 +73,9 @@ services:
       # 时区上海
       TZ: Asia/Shanghai
       SERVER_PORT: 8080
+    depends_on:
+      - redis
+      - mysql
     volumes:
       # 配置文件
       - ./server1/logs/:/ruoyi/server/logs/
@@ -121,6 +91,9 @@ services:
       # 时区上海
       TZ: Asia/Shanghai
       SERVER_PORT: 8081
+    depends_on:
+      - redis
+      - mysql
     volumes:
       # 配置文件
       - ./server2/logs/:/ruoyi/server/logs/
@@ -128,27 +101,60 @@ services:
     #      - /docker/skywalking/agent/:/ruoyi/skywalking/agent
     privileged: true
     #network_mode: "host"  #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
-
-  ruoyi-monitor-admin:
-    image: ruoyi/ruoyi-monitor-admin:0.8.3
-    container_name: ruoyi-monitor-admin
-    environment:
-      # 时区上海
-      TZ: Asia/Shanghai
-    volumes:
-      # 配置文件
-      - ./monitor/logs/:/ruoyi/monitor/logs
-    privileged: true
-    #network_mode: "host"  #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
-
-  ruoyi-xxl-job-admin:
-    image: ruoyi/ruoyi-xxl-job-admin:0.8.3
-    container_name: ruoyi-xxl-job-admin
-    environment:
-      # 时区上海
-      TZ: Asia/Shanghai
-    volumes:
-      # 配置文件
-      - ./xxljob/logs/:/ruoyi/xxljob/logs
-    privileged: true
-    #network_mode: "host"  #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
+#
+#  minio:
+#    image: minio/minio:RELEASE.2023-03-24T21-41-23Z
+#    container_name: minio
+#    ports:
+#      # api 端口
+#      - "9000:9000"
+#      # 控制台端口
+#      - "9001:9001"
+#    environment:
+#      # 时区上海
+#      TZ: Asia/Shanghai
+#      # 管理后台用户名
+#      MINIO_ROOT_USER: ruoyi
+#      # 管理后台密码，最小8个字符
+#      MINIO_ROOT_PASSWORD: ruoyi123
+#      # https需要指定域名
+#      #MINIO_SERVER_URL: "https://xxx.com:9000"
+#      #MINIO_BROWSER_REDIRECT_URL: "https://xxx.com:9001"
+#      # 开启压缩 on 开启 off 关闭
+#      MINIO_COMPRESS: "off"
+#      # 扩展名 .pdf,.doc 为空 所有类型均压缩
+#      MINIO_COMPRESS_EXTENSIONS: ""
+#      # mime 类型 application/pdf 为空 所有类型均压缩
+#      MINIO_COMPRESS_MIME_TYPES: ""
+#    volumes:
+#      # 映射当前目录下的data目录至容器内/data目录
+#      - ./minio/data:/data
+#      # 映射配置目录
+#      - ./minio/config:/root/.minio/
+#    command: server --address ':9000' --console-address ':9001' /data  # 指定容器中的目录 /data
+#    privileged: true
+#    #network_mode: "host" #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
+#
+#  ruoyi-monitor-admin:
+#    image: ruoyi/ruoyi-monitor-admin:0.8.3
+#    container_name: ruoyi-monitor-admin
+#    environment:
+#      # 时区上海
+#      TZ: Asia/Shanghai
+#    volumes:
+#      # 配置文件
+#      - ./monitor/logs/:/ruoyi/monitor/logs
+#    privileged: true
+#    #network_mode: "host"  #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
+#
+#  ruoyi-xxl-job-admin:
+#    image: ruoyi/ruoyi-xxl-job-admin:0.8.3
+#    container_name: ruoyi-xxl-job-admin
+#    environment:
+#      # 时区上海
+#      TZ: Asia/Shanghai
+#    volumes:
+#      # 配置文件
+#      - ./xxljob/logs/:/ruoyi/xxljob/logs
+#    privileged: true
+#    #network_mode: "host"  #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。

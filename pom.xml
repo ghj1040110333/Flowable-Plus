@@ -72,6 +72,13 @@
             </activation>
         </profile>
         <profile>
+            <id>docker</id>
+            <properties>
+                <profiles.active>docker</profiles.active>
+                <logging.level>warn</logging.level>
+            </properties>
+        </profile>
+        <profile>
             <id>prod</id>
             <properties>
                 <profiles.active>prod</profiles.active>
