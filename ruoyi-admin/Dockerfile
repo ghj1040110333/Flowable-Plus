@@ -20,4 +20,5 @@ ENTRYPOINT ["java", \
             # 应用名称 如果想区分集群节点监控 改成不同的名称即可
 #            "-Dskywalking.agent.service_name=ruoyi-server", \
 #            "-javaagent:/ruoyi/skywalking/agent/skywalking-agent.jar", \
-            "-jar", "app.jar"]
+            "-jar","app.jar","--spring.profiles.active=docker"]
+# docker build -t ruoyi/ruoyi-server:0.8.3 .
