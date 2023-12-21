@@ -80,6 +80,7 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
 
+//vue信息提示
 Vue.config.productionTip = false
 
 new Vue({

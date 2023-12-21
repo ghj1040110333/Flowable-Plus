@@ -4,7 +4,6 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-
 const CompressionPlugin = require('compression-webpack-plugin')
 
 const name = process.env.VUE_APP_TITLE || 'Flowable-Plus后台管理系统' // 网页标题
