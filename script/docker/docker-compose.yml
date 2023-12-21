@@ -29,7 +29,7 @@ services:
     #network_mode: "host" #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
 
   nginx-web:
-    image: nginx:1.22.1
+    image: nginx:1.23.1
     container_name: nginx-web
     environment:
       # 时区上海
