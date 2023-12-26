@@ -85,7 +85,7 @@ services:
     #network_mode: "host"  #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
 
   ruoyi-server2:
-    image: "ruoyi/ruoyi-server:0.8.3"
+    image: ruoyi/ruoyi-server:0.8.3
     container_name: ruoyi-server2
     environment:
       # 时区上海
@@ -101,7 +101,7 @@ services:
     #      - /docker/skywalking/agent/:/ruoyi/skywalking/agent
     privileged: true
     #network_mode: "host"  #容器将共享主机的网络命名空间，并可以直接访问主机的网络接口和配置。
-#
+
 #  minio:
 #    image: minio/minio:RELEASE.2023-03-24T21-41-23Z
 #    container_name: minio
@@ -138,6 +138,8 @@ services:
 #  ruoyi-monitor-admin:
 #    image: ruoyi/ruoyi-monitor-admin:0.8.3
 #    container_name: ruoyi-monitor-admin
+#    ports:
+#      - "9090:9090"
 #    environment:
 #      # 时区上海
 #      TZ: Asia/Shanghai
@@ -150,6 +152,8 @@ services:
 #  ruoyi-xxl-job-admin:
 #    image: ruoyi/ruoyi-xxl-job-admin:0.8.3
 #    container_name: ruoyi-xxl-job-admin
+#    ports:
+#      - "9100:9100"
 #    environment:
 #      # 时区上海
 #      TZ: Asia/Shanghai
